@@ -1,0 +1,17 @@
+name: auxtel_aos
+
+channels:
+  - conda-forge
+
+dependencies:
+  - python>3.8
+  - numpy
+  - matplotlib
+  - scipy
+  - jupyterlab
+  - galsim
+  - cmake
+  - pip:
+      - batoid
+      - git+https://github.com/lsst/sphgeom.git
+      - git+https://github.com/jmeyers314/wfsim.git
