@@ -13,5 +13,5 @@ dependencies:
   - cmake
   - pip:
       - batoid
-      - git+https://github.com/lsst/sphgeom.git
+      - lsst-sphgeom
       - git+https://github.com/jmeyers314/wfsim.git
