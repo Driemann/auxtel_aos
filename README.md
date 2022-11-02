@@ -4,6 +4,13 @@ AOS simulations for the Rubin AuxTel
 
 ## Installation
 
+First, make sure you have `conda` and `git` installed.
+If you have not installed `conda`, look [here](https://docs.conda.io/en/latest/miniconda.html).
+If you do not already have `git`, look [here](https://git-scm.com).
+You can also install git using `conda`, but this will be environment dependent.
+
+Once you have `conda` and `git`,
+
 1. clone this repo, e.g.
 
 ```bash
