@@ -10,9 +10,11 @@ dependencies:
   - matplotlib
   - scipy
   - jupyterlab
+  - ipywidgets
   - galsim
   - cmake
   - pip:
       - batoid
+      - danish
       - lsst-sphgeom
       - git+https://github.com/jmeyers314/wfsim.git
