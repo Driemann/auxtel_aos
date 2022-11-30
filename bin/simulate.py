@@ -5,6 +5,9 @@ import batoid
 import galsim
 import wfsim
 
+auxtel0 = batoid.Optic.fromYaml("AuxTel.yaml")
+bandpass = galsim.Bandpass("LSST_r.dat", wave_type='nm')
+
 obs_params = {
     "zenith": 30 * galsim.degrees,
     "raw_seeing": 0.7 * galsim.arcsec,
