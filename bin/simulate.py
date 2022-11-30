@@ -62,4 +62,12 @@ intra_perturbed = (
     .withLocallyRotatedOptic("M2", M2_rot)
 )
 
-print("Go germany in worldcup")
+intra_perturbed_simulator = create_simulator(intra_perturbed)
+intra_perturbed_simulator.add_star(thx, thy, sed, flux, rng)
+
+img_ip = intra_perturbed_simulator.image.array
+
+np.save('image_ip', img_ip)
+np.save('trans_ip', M2_trans)
+np.save('rot_ip', M2_rot)
+
