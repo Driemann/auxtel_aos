@@ -61,3 +61,5 @@ intra_perturbed = (
     .withGloballyShiftedOptic("M2", M2_trans)
     .withLocallyRotatedOptic("M2", M2_rot)
 )
+
+print("Go germany in worldcup")
