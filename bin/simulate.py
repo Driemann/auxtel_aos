@@ -39,35 +39,41 @@ def create_simulator(telescope: batoid.Optic) -> wfsim.SimpleSimulator:
     return simulator
 
 
-rng = np.random.default_rng(0)
-thx = np.deg2rad(0)
-thy = np.deg2rad(0)
-star_temp = rng.uniform(4_000, 10_000) 
-sed = wfsim.BBSED(star_temp) 
-flux = rng.integers(1_000_000, 2_000_000)
+Trans_data={}
+Rot_data={}
+image={}
+for i in range(4)
+    a=i
+    rng = np.random.default_rng(0)
+    thx = np.deg2rad(0)
+    thy = np.deg2rad(0)
+    star_temp = rng.uniform(4_000, 10_000) 
+    sed = wfsim.BBSED(star_temp) 
+    flux = rng.integers(1_000_000, 2_000_000)
 
 
-M2_trans = np.array([
+    Trans_data[a] = np.array([
     rng.uniform(-0.001, 0.001),  # meters
     rng.uniform(-0.001, 0.001),
     rng.uniform(-0.0001, 0.0001),
 ])
-M2_rot = (
+    Rot_data[a] = (
     batoid.RotX(np.deg2rad(rng.uniform(-0.1, 0.1)/60)) @
     batoid.RotY(np.deg2rad(rng.uniform(-0.1, 0.1)/60))
 )
-intra_perturbed = (
+    intra_perturbed = (
     auxtel0
     .withGloballyShiftedOptic("M2", M2_trans)
     .withLocallyRotatedOptic("M2", M2_rot)
 )
 
-intra_perturbed_simulator = create_simulator(intra_perturbed)
-intra_perturbed_simulator.add_star(thx, thy, sed, flux, rng)
+    intra_perturbed_simulator = create_simulator(intra_perturbed)
+    intra_perturbed_simulator.add_star(thx, thy, sed, flux, rng)
 
-img_ip = intra_perturbed_simulator.image.array
+    image[a] = intra_perturbed_simulator.image.array
 
-np.save('image_ip', img_ip)
-np.save('trans_ip', M2_trans)
-np.save('rot_ip', M2_rot)
+    np.save('image_ip', image[a])
+    np.save('trans_ip', Trans_data[a])
+    np.save('rot_ip', Rot_data[a])
+
 
