@@ -72,8 +72,8 @@ for i in range(4)
 
     image[a] = intra_perturbed_simulator.image.array
 
-    np.save('image_ip', image[a])
-    np.save('trans_ip', Trans_data[a])
-    np.save('rot_ip', Rot_data[a])
+    np.save('image_'+str(i), image[a])
+    np.save('trans_'+str(i), Trans_data[a])
+    np.save('rot_'+str(i), Rot_data[a])
 
 
