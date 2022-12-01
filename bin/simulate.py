@@ -42,7 +42,7 @@ def create_simulator(telescope: batoid.Optic) -> wfsim.SimpleSimulator:
 Trans_data={}
 Rot_data={}
 image={}
-for i in range(4)
+for i in range(4):
     a=i
     rng = np.random.default_rng(0)
     thx = np.deg2rad(0)
