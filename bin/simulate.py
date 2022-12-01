@@ -71,7 +71,7 @@ for i in range(4):
     intra_perturbed_simulator[a] = create_simulator(intra_perturbed[a])
     intra_perturbed_simulator[a].add_star(thx, thy, sed, flux, rng)
 
-    image[a] = intra_perturbed_simulator.image.array
+    image[a] = intra_perturbed_simulator[a].image.array
 
     np.save('image_'+str(a), image[a])
     np.save('trans_'+str(a), Trans_data[a])
