@@ -63,8 +63,8 @@ for i in range(4):
 )
     intra_perturbed = (
     auxtel0
-    .withGloballyShiftedOptic("M2", M2_trans)
-    .withLocallyRotatedOptic("M2", M2_rot)
+    .withGloballyShiftedOptic("M2", Trans_data[a])
+    .withLocallyRotatedOptic("M2", Rot_data[a])
 )
 
     intra_perturbed_simulator = create_simulator(intra_perturbed)
