@@ -54,9 +54,9 @@ for i in range(4):
     a=i
 
     Trans_data[a] = np.array([
-    rng.uniform(-0.001, 0.001),  # meters
+    rng.uniform(-0.001, 0.001),  
     rng.uniform(-0.001, 0.001),
-    rng.uniform(-0.0001, 0.0001),
+    rng.uniform(-0.0001, 0.0001)-.0008,
 ])
     Rot_data[a] = (
     batoid.RotX(np.deg2rad(rng.uniform(-0.1, 0.1)/60)) @
