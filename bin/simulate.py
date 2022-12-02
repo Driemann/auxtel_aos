@@ -1,5 +1,4 @@
 import numpy as np 
-import matplotlib.pyplot as plt 
 
 import batoid
 import galsim
@@ -23,9 +22,7 @@ atm_params = {
     "nproc": 6,
 }
 
-def create_simulator(telescope: batoid.Optic) -> wfsim.SimpleSimulator:
-   
-    rng = np.random.default_rng(42)
+def create_simulator(telescope: batoid.Optic, rng) -> wfsim.SimpleSimulator:
 
     simulator = wfsim.SimpleSimulator(
         obs_params,
@@ -38,43 +35,40 @@ def create_simulator(telescope: batoid.Optic) -> wfsim.SimpleSimulator:
 
     return simulator
 
+
 rng = np.random.default_rng(0)
 thx = np.deg2rad(0)
 thy = np.deg2rad(0)
-star_temp = rng.uniform(4_000, 10_000) 
-sed = wfsim.BBSED(star_temp) 
-flux = rng.integers(1_000_000, 2_000_000)
 
-Trans_data={}
-Rot_data={}
-image={}
-intra_perturbed={}
-intra_perturbed_simulator={}
-for i in range(4):
-    a=i
+for a in range(2):
+    star_temp = rng.uniform(4_000, 10_000) 
+    sed = wfsim.BBSED(star_temp) 
+    flux = rng.integers(1_000_000, 2_000_000)
+    background = rng.uniform(0, 0.2)*flux
 
-    Trans_data[a] = np.array([
-    rng.uniform(-0.001, 0.001),  
-    rng.uniform(-0.001, 0.001),
-    rng.uniform(-0.0001, 0.0001)-.0008,
-])
-    Rot_data[a] = (
-    batoid.RotX(np.deg2rad(rng.uniform(-0.1, 0.1)/60)) @
-    batoid.RotY(np.deg2rad(rng.uniform(-0.1, 0.1)/60))
-)
-    intra_perturbed[a] = (
-    auxtel0
-    .withGloballyShiftedOptic("M2", Trans_data[a])
-    .withLocallyRotatedOptic("M2", Rot_data[a])
-)
+    Trans_data = np.array([
+        rng.uniform(-0.001, 0.001),  
+        rng.uniform(-0.001, 0.001),
+        rng.uniform(-0.0001, 0.0001)-.0008,
+    ])
+    
+    Rot_data = (
+        batoid.RotX(np.deg2rad(rng.uniform(-0.1, 0.1)/60)) @
+        batoid.RotY(np.deg2rad(rng.uniform(-0.1, 0.1)/60))
+    )
 
-    intra_perturbed_simulator[a] = create_simulator(intra_perturbed[a])
-    intra_perturbed_simulator[a].add_star(thx, thy, sed, flux, rng)
+    intra_perturbed = (
+        auxtel0
+        .withGloballyShiftedOptic("M2", Trans_data)
+        .withLocallyRotatedOptic("M2", Rot_data)
+    )
 
-    image[a] = intra_perturbed_simulator[a].image.array
+    intra_perturbed_simulator = create_simulator(intra_perturbed, rng)
+    intra_perturbed_simulator.add_star(thx, thy, sed, flux, rng)
+    intra_perturbed_simulator.add_background(background, rng)
 
-    np.save('donut_image_'+str(a), image[a])
-    np.save('donut_trans_'+str(a), Trans_data[a])
-    np.save('donut_rot_'+str(a), Rot_data[a])
+    image = intra_perturbed_simulator.image.array
+
+    np.savez('../data/donut_data'+str(a), image=image, Translation=Trans_data, Rotation=Rot_data, Temp=star_temp, flux=flux, background=background )
 
 
