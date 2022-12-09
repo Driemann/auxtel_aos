@@ -40,11 +40,11 @@ rng = np.random.default_rng(0)
 thx = np.deg2rad(0)
 thy = np.deg2rad(0)
 
-for a in range(2):
+for a in range(1):
     star_temp = rng.uniform(4_000, 10_000) 
     sed = wfsim.BBSED(star_temp) 
     flux = rng.integers(1_000_000, 2_000_000)
-    background = rng.uniform(0, 0.2)*flux
+    background = rng.uniform(0, 0.02)*flux
 
     Trans_data = np.array([
         rng.uniform(-0.001, 0.001),  
@@ -64,11 +64,13 @@ for a in range(2):
     )
 
     intra_perturbed_simulator = create_simulator(intra_perturbed, rng)
+    intra_perturbed_simulator._construct_wcs()
+    xfield, yfield= intra_perturbed_simulator.wcs.xyToradec(0, 0, galsim.radians)
     intra_perturbed_simulator.add_star(thx, thy, sed, flux, rng)
     intra_perturbed_simulator.add_background(background, rng)
 
     image = intra_perturbed_simulator.image.array
 
-    np.savez('../data/donut_data'+str(a), image=image, Translation=Trans_data, Rotation=Rot_data, Temp=star_temp, flux=flux, background=background )
+    np.savez('../data/Center_data'+str(a), image=image, Translation=Trans_data, Rotation=Rot_data, Temp=star_temp, flux=flux, background=background )
 
 
