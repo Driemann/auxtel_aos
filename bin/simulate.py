@@ -38,12 +38,12 @@ def create_simulator(telescope: batoid.Optic, rng) -> wfsim.SimpleSimulator:
 
 rng = np.random.default_rng(0)
 
-for a in range(2):
+for a in range(1):
     star_temp = rng.uniform(4_000, 10_000) 
     sed = wfsim.BBSED(star_temp) 
     flux = rng.integers(1_000_000, 2_000_000)
-    #background = rng.uniform(0, 0.002)*flux
-    background = 0.0002*flux
+    #background = rng.uniform(0, 0.001)*flux
+    background = 0.0001*flux
 
     Trans_data = np.array([
         rng.uniform(-0.001, 0.001),  
