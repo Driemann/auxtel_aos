@@ -71,6 +71,6 @@ for a in range(1):
     image = intra_perturbed_simulator.image.array
     cropped_image=image[1850:2150, 1850:2150]
 
-    np.savez('../data/Test4_data'+str(a), image=cropped_image, Translation=Trans_data, Rotation=Rot_data, Temp=star_temp, flux=flux, background=background )
+    np.savez('../data/Test5_data'+str(a), image=cropped_image, Translation=Trans_data, Rotation=Rot_data, Temp=star_temp, flux=flux, background=background )
 
 
