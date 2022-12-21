@@ -38,7 +38,7 @@ def create_simulator(telescope: batoid.Optic, rng) -> wfsim.SimpleSimulator:
 
 rng = np.random.default_rng(0)
 
-for a in range(3):
+for a in range(2):
     star_temp = rng.uniform(4_000, 10_000) 
     sed = wfsim.BBSED(star_temp) 
     flux = rng.integers(1_000_000, 2_000_000)
@@ -70,6 +70,6 @@ for a in range(3):
     image = intra_perturbed_simulator.image.array
     cropped_image=image[1850:2150, 1850:2150]
 
-    np.savez('../data/Testing_data'+str(a), image=cropped_image, Translation=Trans_data, Rotation=Rot_data, Temp=star_temp, flux=flux, background=background )
+    np.savez('../data/Testing9_data'+str(a), image=cropped_image, Translation=Trans_data, Rotation=Rot_data, Temp=star_temp, flux=flux, background=background )
 
 
