@@ -22,7 +22,7 @@ atm_params = {
     "nproc": 6,
 }
 
-rng = np.random.default_rng(5)
+rng = np.random.default_rng(7)
 
 simulator = wfsim.SimpleSimulator(
     obs_params,
@@ -66,6 +66,6 @@ for a in range(5000):
     image = simulator.image.array
     cropped_image=image[1850:2150, 1850:2150]
 
-    np.savez('../data/flip_donut1_data'+str(a), image=cropped_image, Translation=Trans_data, Rotation=Rot_data, Temp=star_temp, flux=flux, background=background )
+    np.savez('../data/flip_donut3_data'+str(a), image=cropped_image, Translation=Trans_data, Rotation=Rot_data, Temp=star_temp, flux=flux, background=background )
 
     simulator.image.setZero()
