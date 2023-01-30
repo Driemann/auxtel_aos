@@ -16,14 +16,15 @@ obs_params = {
     "wavelength": bandpass.effective_wavelength,
     "exptime": 30, 
 }
+#Atmosphere parameters
 atm_params = {
     "screen_size": 819.2,
     "screen_scale": 0.1,
     "nproc": 6,
 }
-
+#Random integer generator
 rng = np.random.default_rng(7)
-
+#Define the simulator
 simulator = wfsim.SimpleSimulator(
     obs_params,
     atm_params,
@@ -39,19 +40,20 @@ for a in range(5000):
     star_temp = rng.uniform(4_000, 10_000) 
     sed = wfsim.BBSED(star_temp) 
     flux = rng.integers(1_000_000, 2_000_000)
-    background = rng.uniform(0, 0.0001)*flux
-
+    background = rng.uniform(0, 0.0001)*flux #random percentage of the flux
+    
+    #Translational data in meters
     Trans_data = np.array([
         rng.uniform(-0.001, 0.001),  
         rng.uniform(-0.001, 0.001),
-        rng.uniform(-0.0001, 0.0001)+.0008,
+        rng.uniform(-0.0001, 0.0001)+.0008, #positive displacement is extrfocal, negative is intrafocal
     ])
-    
+    #Rotational data in radians
     Rot_data = (
         batoid.RotX(np.deg2rad(rng.uniform(-0.1, 0.1)/60)) @
         batoid.RotY(np.deg2rad(rng.uniform(-0.1, 0.1)/60))
     )
-
+    #Telescope
     intra_perturbed = (
         auxtel0
         .withGloballyShiftedOptic("M2", Trans_data)
@@ -68,4 +70,5 @@ for a in range(5000):
 
     np.savez('../data/flip_donut3_data'+str(a), image=cropped_image, Translation=Trans_data, Rotation=Rot_data, Temp=star_temp, flux=flux, background=background )
 
+    #Set blank baseline image
     simulator.image.setZero()
