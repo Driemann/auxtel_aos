@@ -42,17 +42,20 @@ for a in range(5000):
     flux = rng.integers(1_000_000, 2_000_000)
     background = rng.uniform(0, 0.0001)*flux #random percentage of the flux
     
+    # random translations (meters)
+    dx = rng.uniform(-0.001, 0.001)
+    dy = rng.uniform(-0.001, 0.001)
+    dz = rng.uniform(-0.001, 0.001)
+    
     #Translational data in meters
-    Trans_data = np.array([
-        rng.uniform(-0.001, 0.001),  
-        rng.uniform(-0.001, 0.001),
-        rng.uniform(-0.0001, 0.0001)+.0008, #positive displacement is extrfocal, negative is intrafocal
-    ])
+    Trans_data = np.array([dx, dy, dz + 0.0008]) #positive displacement is extrafocal, negative is intrafocal
+    
+    # random rotations (radians)
+    rotx = np.deg2rad(rng.uniform(-0.1, 0.1)/60)
+    roty = np.deg2rad(rng.uniform(-0.1, 0.1)/60)
+    
     #Rotational data in radians
-    Rot_data = (
-        batoid.RotX(np.deg2rad(rng.uniform(-0.1, 0.1)/60)) @
-        batoid.RotY(np.deg2rad(rng.uniform(-0.1, 0.1)/60))
-    )
+    Rot_data = (batoid.RotX(rotx) @ batoid.RotY(roty))
     #Telescope
     intra_perturbed = (
         auxtel0
@@ -67,8 +70,17 @@ for a in range(5000):
 
     image = simulator.image.array
     cropped_image=image[1850:2150, 1850:2150]
+    
+    dof = np.array([dx, dy, dz, rotx, roty])
 
-    np.savez('../data/flip_donut3_data'+str(a), image=cropped_image, Translation=Trans_data, Rotation=Rot_data, Temp=star_temp, flux=flux, background=background )
+    np.savez(
+        '../data/extrafocal1_donut'+str(a)+'.npz', 
+        image=cropped_image, T
+        dof=dof,
+        temp=star_temp, 
+        flux=flux, 
+        background=background,
+    )
 
     #Set blank baseline image
     simulator.image.setZero()

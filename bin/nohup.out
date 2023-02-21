@@ -1,4 +1,0 @@
-Traceback (most recent call last):
-  File "/astro/users/driemann/auxtel_aos/bin/simulate.py", line 5, in <module>
-    import wfsim
-ModuleNotFoundError: No module named 'wfsim'
