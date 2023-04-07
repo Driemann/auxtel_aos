@@ -1,0 +1,43 @@
+  File "/astro/users/driemann/auxtel_aos/bin/simulate2.py", line 79
+    dof=dof,
+    ^
+SyntaxError: positional argument follows keyword argument
+Traceback (most recent call last):
+  File "/astro/users/driemann/auxtel_aos/bin/simulate2.py", line 76, in <module>
+    np.savez(
+  File "<__array_function__ internals>", line 180, in savez
+  File "/astro/users/driemann/.conda/envs/auxtel_aos/lib/python3.9/site-packages/numpy/lib/npyio.py", line 615, in savez
+    _savez(file, args, kwds, False)
+  File "/astro/users/driemann/.conda/envs/auxtel_aos/lib/python3.9/site-packages/numpy/lib/npyio.py", line 712, in _savez
+    zipf = zipfile_factory(file, mode="w", compression=compression)
+  File "/astro/users/driemann/.conda/envs/auxtel_aos/lib/python3.9/site-packages/numpy/lib/npyio.py", line 103, in zipfile_factory
+    return zipfile.ZipFile(file, *args, **kwargs)
+  File "/astro/users/driemann/.conda/envs/auxtel_aos/lib/python3.9/zipfile.py", line 1248, in __init__
+    self.fp = io.open(file, filemode)
+OSError: [Errno 122] Disk quota exceeded: '../data/intrafocal2_donut4363.npz'
+Traceback (most recent call last):
+  File "/astro/users/driemann/auxtel_aos/bin/simulate2.py", line 76, in <module>
+    np.savez(
+  File "<__array_function__ internals>", line 180, in savez
+  File "/astro/users/driemann/.conda/envs/auxtel_aos/lib/python3.9/site-packages/numpy/lib/npyio.py", line 615, in savez
+    _savez(file, args, kwds, False)
+  File "/astro/users/driemann/.conda/envs/auxtel_aos/lib/python3.9/site-packages/numpy/lib/npyio.py", line 712, in _savez
+    zipf = zipfile_factory(file, mode="w", compression=compression)
+  File "/astro/users/driemann/.conda/envs/auxtel_aos/lib/python3.9/site-packages/numpy/lib/npyio.py", line 103, in zipfile_factory
+    return zipfile.ZipFile(file, *args, **kwargs)
+  File "/astro/users/driemann/.conda/envs/auxtel_aos/lib/python3.9/zipfile.py", line 1248, in __init__
+    self.fp = io.open(file, filemode)
+OSError: [Errno 122] Disk quota exceeded: '../data/intrafocal2_donut4363.npz'
+Traceback (most recent call last):
+  File "/astro/users/driemann/auxtel_aos/bin/simulate2.py", line 76, in <module>
+    np.savez(
+  File "<__array_function__ internals>", line 180, in savez
+  File "/astro/users/driemann/.conda/envs/auxtel_aos/lib/python3.9/site-packages/numpy/lib/npyio.py", line 615, in savez
+    _savez(file, args, kwds, False)
+  File "/astro/users/driemann/.conda/envs/auxtel_aos/lib/python3.9/site-packages/numpy/lib/npyio.py", line 712, in _savez
+    zipf = zipfile_factory(file, mode="w", compression=compression)
+  File "/astro/users/driemann/.conda/envs/auxtel_aos/lib/python3.9/site-packages/numpy/lib/npyio.py", line 103, in zipfile_factory
+    return zipfile.ZipFile(file, *args, **kwargs)
+  File "/astro/users/driemann/.conda/envs/auxtel_aos/lib/python3.9/zipfile.py", line 1248, in __init__
+    self.fp = io.open(file, filemode)
+OSError: [Errno 122] Disk quota exceeded: '../data/intrafocal2_donut4367.npz'

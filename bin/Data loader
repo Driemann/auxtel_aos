@@ -1,0 +1,36 @@
+class Idk:
+ 
+    def __init__(
+        self,
+        mode: str = "train",
+        nval: int = 256,
+        ntest: int = 2 ** 10,
+        data_dir: str = "../data",
+        **kwargs: Any,
+    ) -> None:
+        
+        data_files = glob.glob(f"{data_dir}/*")
+        
+        test_set = data_files[-ntest:]
+        rest=data_files[:-ntest]
+        
+        val_set = rest[-nval:]
+        train_set=rest[:-nval]
+              
+        if mode == "train":
+            self._data_files = train_set
+        elif mode == "val":
+            self._data_files = val_set
+        elif mode == "test":
+            self._data_files = test_set
+            
+    def __len__(self) -> int:
+        return len(self._data_files)
+
+    def __getitem__(self, idx: int) -> Dict[str, torch.Tensor]:
+         # get the image file
+        data_file = self._data_files[idx]
+
+        # load the image
+        img = np.load(data_file)
+        return img
